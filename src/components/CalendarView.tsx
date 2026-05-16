@@ -8,7 +8,7 @@ export const CalendarView = () => {
     <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col h-[400px] transition-colors">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold flex items-center text-gray-900 dark:text-white">
-          <CalendarIcon className="mr-2" size={20} /> Today's Schedule
+          <CalendarIcon className="mr-2" size={20} /> Today&apos;s Schedule
         </h2>
         <span className="text-sm text-gray-500 dark:text-gray-400">
           {new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
