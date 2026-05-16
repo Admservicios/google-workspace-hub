@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
+import prisma from '../config/database';
 
 const router = Router();
 
@@ -51,10 +52,30 @@ router.get('/google/callback', async (req: Request, res: Response) => {
       { expiresIn: '7d' }
     );
 
-    // Guardar usuario en BD (implementar después con Prisma)
-    
+    // Guardar usuario en BD
+    await prisma.user.upsert({
+      where: { email },
+      update: {
+        name,
+        profileImage: picture,
+        accessToken: access_token,
+        refreshToken: refresh_token,
+        tokenExpiresAt: new Date(Date.now() + expires_in * 1000),
+      },
+      create: {
+        email,
+        name,
+        googleId: email, // Usamos email como googleId por ahora si no viene id
+        profileImage: picture,
+        accessToken: access_token,
+        refreshToken: refresh_token,
+        tokenExpiresAt: new Date(Date.now() + expires_in * 1000),
+      },
+    });
+
     // Redirigir al frontend con token
-    res.redirect(`${process.env.CORS_ORIGIN?.split(',')[0] || 'http://localhost:3000'}?token=${jwtToken}`);
+    const frontendUrl = process.env.CORS_ORIGIN?.split(',')[0] || 'http://localhost:3000';
+    res.redirect(`${frontendUrl}/auth-callback?token=${jwtToken}`);
   } catch (error) {
     console.error('Error en callback:', error);
     res.status(500).json({ error: 'Authentication failed' });
