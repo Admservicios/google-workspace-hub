@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Google Workspace Hub
 
-## Getting Started
+Un dashboard centralizado y moderno para gestionar herramientas de Google Workspace (Gmail, Calendar, Tasks, Notes) y asistencia por IA (Gemini).
 
-First, run the development server:
+## Requisitos
+- Node.js 20+
 
+## Instalación
+
+1. Clona el repositorio e instala las dependencias:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Ejecuta el servidor de desarrollo:
+```bash
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Acceso
+Abre [http://localhost:3000](http://localhost:3000) con tu navegador para ver el resultado.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Estructura de Carpetas
 
-## Learn More
+```
+src/
+├── app/          # Next.js App Router (Páginas y API Routes)
+├── components/   # Componentes de UI modulares
+├── hooks/        # Custom hooks para la lógica de negocio
+├── lib/          # Datos mock y utilidades
+├── store/        # Estado global con Zustand
+├── styles/       # Variables CSS y temas
+└── types/        # Definiciones de TypeScript
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Modificar Mock Data
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Para agregar nuevas tareas, emails, o modificar cualquier dato inicial, puedes editar el archivo `src/lib/mockData.ts`. La estructura de tipos garantiza que los datos cumplan con el formato esperado.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Ejemplo para agregar una tarea:
+Simplemente añade un nuevo objeto al array `mockTasks` siguiendo la interfaz `Task` definida en `src/types/tasks.ts`.
 
-## Deploy on Vercel
+## Funcionalidades
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Dark Mode**: Soporte nativo y persistente de modo oscuro (Haz click en el icono del sol/luna en la cabecera).
+- **Responsive**: Totalmente adaptable a dispositivos móviles, tablets y escritorio.
+- **Gestión de Estado**: Utiliza Zustand para manejar toda la información centralizada en `src/store/appStore.ts`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Próximas Fases
+- Autenticación real con Google OAuth.
+- Conexión con las APIs reales de Google Workspace (Gmail API, Calendar API, etc.).
+- Almacenamiento persistente en base de datos.
