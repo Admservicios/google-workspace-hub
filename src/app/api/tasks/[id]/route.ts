@@ -2,8 +2,9 @@ import { NextResponse } from 'next/server';
 
 export async function PATCH(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   const body = await request.json();
-  return NextResponse.json({ data: { id: params.id, ...body, updated: new Date().toISOString() } });
+  return NextResponse.json({ data: { id, ...body, updated: new Date().toISOString() } });
 }

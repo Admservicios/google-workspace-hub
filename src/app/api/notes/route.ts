@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { mockNotes } from '../../../../lib/mockData';
+import { mockNotes } from '@/lib/mockData';
 
 export async function GET() {
   return NextResponse.json({ data: mockNotes });
