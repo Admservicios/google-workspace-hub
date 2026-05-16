@@ -8,7 +8,7 @@ import { TasksManager } from './TasksManager';
 import { NotesEditor } from './NotesEditor';
 import { GeminiChat } from './GeminiChat';
 
-export const Dashboard = () => {
+export default function Dashboard() {
   return (
     <div className="flex h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
       <Sidebar />
@@ -30,4 +30,4 @@ export const Dashboard = () => {
       </div>
     </div>
   );
-};
+}

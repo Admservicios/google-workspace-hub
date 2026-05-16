@@ -1,8 +1,20 @@
-import { Dashboard } from '../components/Dashboard';
+'use client';
+
+import { useEffect } from 'react';
+import { useAppStore } from '../store/appStore';
+import Dashboard from '../components/Dashboard';
 
 export default function Home() {
+  useEffect(() => {
+    // Inicializar tema
+    const isDark = useAppStore.getState().isDarkMode;
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    }
+  }, []);
+
   return (
-    <main>
+    <main className="min-h-screen bg-white dark:bg-slate-950 transition-colors">
       <Dashboard />
     </main>
   );
